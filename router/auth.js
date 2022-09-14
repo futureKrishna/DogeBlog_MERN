@@ -2,11 +2,17 @@ const express=require('express');
 const router=express.Router()
 const db=require('../database/db')
 const User=require('../models/forsignup')
+const body_parser=require('body-parser')
 const bcrypt=require('bcryptjs')
 
-// router.get('/', (req, res) => {
-//     res.send('Hello home router!')
-// })
+router.use(body_parser.json())
+router.use(body_parser.urlencoded({extended:true}))
+
+
+router.get('/', (req, res) => {
+    res.render('/')
+    // res.send('Hello home router!')
+})
 
 //async await signup route
 router.post('/signup',async (req,res)=>{
@@ -14,7 +20,7 @@ router.post('/signup',async (req,res)=>{
     const email = req.body.email
     const phone = req.body.phone
     const password = req.body.password
-    const cpassword=req.body.cpassword
+    const cpassword= req.body.cpassword
 
     try{
         const userExist=await User.findOne({email:email})
@@ -39,38 +45,38 @@ router.post('/signup',async (req,res)=>{
 
 })
 
-//login route
+// async await login route
 router.post('/login',async (req,res)=>{
 
-    const{email,password}=req.body
+    const email = req.body.email
+    const password=req.body.password
 
     try{
-        if(!email || !password){
-            res.status(400).send("Please enter valid details")
-        }
+        
 
         const userLoginDetails=await User.findOne({email:email})
 
         //changing the password hashcode to a string for checking it's validation
         //1st argument is the user's entered data,2nd argument is db's data
         //const decrypt= await bcrypt.compare(password,userLoginDetails.passMatch)
-
-        if(userLoginDetails){
+        if(!email || !password){
+            res.status(400).send("Please enter details")
+        }
+        else if(userLoginDetails){
             const decrypt= await bcrypt.compare(password,userLoginDetails.password)
             if(!decrypt){
                 res.status(404).send("Invalid Credentials")
             }
             else{
-                localStorage.setItem("userEmail",email)
-                localStorage.setItem("loggedIn",true)
+                // localStorage.setItem("userEmail",email)
+                // localStorage.setItem("loggedIn",true)
                 res.status(200).send("User logged in Successfully")
-                res.redirect('/')
+                res.redirect('/home')
             }
         }
         else{
             res.status(404).send("Invalid Credentials")
         }
-
     }
     catch(err){
         console.log(err)
@@ -78,6 +84,8 @@ router.post('/login',async (req,res)=>{
 })
 
 module.exports=router
+
+
 
 /*
 saving data in db using promises

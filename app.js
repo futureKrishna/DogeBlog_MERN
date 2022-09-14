@@ -1,43 +1,47 @@
-const mongoose=require('mongoose')
-const express = require('express')
-const db=require('./database/db')
-const app = express()
-const port = 3000
+const mongoose = require("mongoose");
+const express = require("express");
+const db = require("./database/db");
+const path = require("path");
+const app = express();
+const port = 3000;
 
 //middleware
-app.use(express.json())
+app.use(express.json());
 
 //middleware:linking the router files to make our route easy
-app.use(require('./router/auth'))
+app.use(require("./router/auth"));
 
 //middleware
-const middleware=(req,res,next)=>{//it takes 3 arguments,next means after 
-  console.log(`hello middleware`) //the middleware's work is done,move to next
+const middleware = (req, res, next) => {
+  //it takes 3 arguments,next means after
+  console.log(`hello middleware`); //the middleware's work is done,move to next
   next();
-}
+};
 
-app.get('/', (req, res) => {
-  res.send('Hello home!')
-})
+app.get("/home", function (req, res) {
+  res.sendFile(path.join(__dirname + "/client/index.html"));
+});
 
-app.get('/about', middleware ,(req, res) => {//added middleware func here : user cannot directly 
-  res.send('Hello about!')                  //go to about section without loggin in
-})
+app.get("/about",middleware, (req, res) => {
+  res.send("Hello about!");
+});
 
-app.get('/login', (req, res) => {
-  res.send('Hello login!')
-})
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/signup.html"));
+});
 
-app.get('/signup', (req, res) => {
-  res.send('Hello signup!')
-})
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/login.html"));
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
 
 /*
-we add middleware to make sure before viting any route and getting it's response,
+added middleware func here : user cannot directly go to about section without loggin in
+
+we add middleware to make sure before visiting any route and getting it's response,
 we can do the work that we want to , like : the we can make sure that user must
 login or signup,before accessing any other page.
 
