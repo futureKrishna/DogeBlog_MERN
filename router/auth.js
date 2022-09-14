@@ -2,10 +2,11 @@ const express=require('express');
 const router=express.Router()
 const db=require('../database/db')
 const User=require('../models/forsignup')
+const bcrypt=require('bcryptjs')
 
-router.get('/', (req, res) => {
-    res.send('Hello home router!')
-})
+// router.get('/', (req, res) => {
+//     res.send('Hello home router!')
+// })
 
 //async await signup route
 router.post('/signup',async (req,res)=>{
@@ -48,14 +49,30 @@ router.post('/login',async (req,res)=>{
             res.status(400).send("Please enter valid details")
         }
 
-        const emailMatch=await User.findOne({email:email})
-        const passMatch=await User.findOne({password:password})
-        if(emailMatch && passMatch){
-            res.status(200).send("Logged in Successfully")
-            res.redirect('/')
+        const userLoginDetails=await User.findOne({email:email})
+
+        //changing the password hashcode to a string for checking it's validation
+        //1st argument is the user's entered data,2nd argument is db's data
+        //const decrypt= await bcrypt.compare(password,userLoginDetails.passMatch)
+
+        if(userLoginDetails){
+            const decrypt= await bcrypt.compare(password,userLoginDetails.password)
+            if(!decrypt){
+                res.status(404).send("Invalid Credentials")
+            }
+            else{
+                localStorage.setItem("userEmail",email)
+                localStorage.setItem("loggedIn",true)
+                res.status(200).send("User logged in Successfully")
+                res.redirect('/')
+            }
+        }
+        else{
+            res.status(404).send("Invalid Credentials")
         }
 
-    }catch(err){
+    }
+    catch(err){
         console.log(err)
     }
 })
