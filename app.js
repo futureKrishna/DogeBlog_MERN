@@ -1,7 +1,6 @@
 const mongoose=require('mongoose')
 const express = require('express')
 const db=require('./database/db')
-const User=require('./models/forsignup')
 const app = express()
 const port = 3000
 
