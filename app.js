@@ -11,6 +11,8 @@ app.use(express.json());
 //middleware:linking the router files to make our route easy
 app.use(require("./router/auth"));
 
+app.use(require("./router/blogs"));
+
 //middleware
 const middleware = (req, res, next) => {
   //it takes 3 arguments,next means after
@@ -30,8 +32,25 @@ app.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/signup.html"));
 });
 
+
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/login.html"));
+});
+
+app.get("/createblog", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/blog.html"));
+});
+
+app.get("/readblog", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/blog.html"));
+});
+
+app.get("/updateblog", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/blog.html"));
+});
+
+app.get("/deleteblog", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/blog.html"));
 });
 
 app.listen(port, () => {

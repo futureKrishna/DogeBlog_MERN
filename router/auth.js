@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router()
 const db=require('../database/db')
-const User=require('../models/forsignup')
+const User=require('../models/signup')
 const body_parser=require('body-parser')
 const bcrypt=require('bcryptjs')
 
@@ -52,8 +52,6 @@ router.post('/login',async (req,res)=>{
     const password=req.body.password
 
     try{
-        
-
         const userLoginDetails=await User.findOne({email:email})
 
         //changing the password hashcode to a string for checking it's validation
