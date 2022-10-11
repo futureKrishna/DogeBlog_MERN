@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router()
 const db=require('../database/db')
-const User=require('../models/myblog')
+const Blog=require('../models/myblog')
 const body_parser=require('body-parser')
 
 router.use(body_parser.json())
@@ -13,10 +13,10 @@ router.post('/createblog',async (req,res)=>{
     const enterblog = req.body.enterblog
 
     try{
-        const user=new User({blogtype,heading,enterblog})
-        const blogsaved=await user.save();
+        const blog=new Blog({blogtype,heading,enterblog})
+        const blogsaved=await blog.save();
         if(blogsaved){
-            res.status(201).send("blog saved successfully")
+            res.status(200).send("blog saved successfully")
         }
     }catch(err){
         console.log(err)
@@ -24,13 +24,13 @@ router.post('/createblog',async (req,res)=>{
 })
 
 
-router.post('/readblog',async (req,res)=>{
-    const heading = req.body.heading
+router.get('/readblog',async (req,res)=>{
+    // const heading = req.body.heading
 
     try{
-        const blogExist=await db.myblog.find({heading:heading})
+        const blogExist=await Blog.find()
         if(blogExist){
-            res.status(422).send("blog fetched successfully")
+            res.status(200).send(blogExist)
         }
         else{
             res.status(402).send("no such blog exist")
@@ -44,7 +44,7 @@ router.post('/readblog',async (req,res)=>{
 router.post('/updateblog',async (req,res)=>{
     const heading = req.body.heading
     try{
-        const blogExist=await db.Myblog.find({heading:heading})
+        const blogExist=await Blog.find({heading:heading})
         if(blogExist){
             res.status(422).send("blog fetched successfully")
             dogeblog.myblog.updateOne({blogtype:blogtype,heading:heading,enterblog:enterblog} , {$set:{enterblog:enterblog}})
@@ -61,7 +61,7 @@ router.post('/updateblog',async (req,res)=>{
 router.post('/deleteblog',async (req,res)=>{
     const heading = req.body.heading
     try{
-        const blogExist=await db.Myblog.find({heading:heading})
+        const blogExist=await Blog.find({heading:heading})
         if(blogExist){
             res.status(422).send("blog fetched successfully")
             dogeblog.Myblog.deleteOne({heading:heading})

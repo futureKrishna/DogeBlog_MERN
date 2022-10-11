@@ -1,13 +1,19 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const db = require("./database/db");
+const body_parser = require('body-parser')
 const path = require("path");
 const app = express();
-const port = 3000;
+const port = 5000;
+var cors = require('cors')
+app.use(cors())
+
 
 //middleware
 app.use(express.json());
 
+app.use(body_parser.json())
+app.use(body_parser.urlencoded({extended:true}))
 //middleware:linking the router files to make our route easy
 app.use(require("./router/auth"));
 
@@ -37,21 +43,21 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/login.html"));
 });
 
-app.get("/createblog", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/blog.html"));
-});
+// app.get("/createblog", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/client/blog.html"));
+// });
 
-app.get("/readblog", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/blog.html"));
-});
+// app.get("/readblog", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/client/blog.html"));
+// });
 
-app.get("/updateblog", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/blog.html"));
-});
+// app.get("/updateblog", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/client/blog.html"));
+// });
 
-app.get("/deleteblog", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/blog.html"));
-});
+// app.get("/deleteblog", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/client/blog.html"));
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

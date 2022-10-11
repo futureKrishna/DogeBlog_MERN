@@ -4,6 +4,7 @@ const db=require('../database/db')
 const User=require('../models/signup')
 const body_parser=require('body-parser')
 const bcrypt=require('bcryptjs')
+// const { body, validationResult } = require('express-validator');
 
 router.use(body_parser.json())
 router.use(body_parser.urlencoded({extended:true}))
@@ -16,26 +17,28 @@ router.get('/', (req, res) => {
 
 //async await signup route
 router.post('/signup',async (req,res)=>{
-    const name = req.body.name
+    const name = req.body.username
     const email = req.body.email
     const phone = req.body.phone
     const password = req.body.password
     const cpassword= req.body.cpassword
 
+    console.log(name , email , phone , password , cpassword)
+
     try{
         const userExist=await User.findOne({email:email})
         if(userExist){
-            res.status(422).send("User already exist")
+            res.status(422).json({success:false})
         }
         else if(password!=cpassword){
-            res.status(423).send("Password not matching")
+            res.status(423).json({success:false})
         }
         else{
             const user=new User({name,email,phone,password,cpassword})
             //bcrypts middleware is working here
             const registered=await user.save();
             if(registered){
-                res.status(201).send("User registered successfully")
+                res.status(201).json({success:true})
             }
         }
 
@@ -68,8 +71,8 @@ router.post('/login',async (req,res)=>{
             else{
                 // localStorage.setItem("userEmail",email)
                 // localStorage.setItem("loggedIn",true)
-                res.status(200).send("User logged in Successfully")
-                res.redirect('/home')
+                console.log(userLoginDetails)
+                res.status(200).send({success:true , username: userLoginDetails.name})
             }
         }
         else{

@@ -1,0 +1,130 @@
+
+*{
+    margin: 0;
+    padding:0;
+}
+
+.mainBoard{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+
+.loginboard{
+    border-radius: 10px;
+    display: flex;
+    width: 50%;
+    margin: 10px auto;
+    height: 80%;
+}
+
+.loginboardleft{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
+
+.loginboardleft h2{
+    color: blue;
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.loginboardleft form{
+    width: 100%; 
+    text-align: center;
+}
+
+.loginlogos{
+    width: 50%;
+    margin: 40px auto;
+    height: 40px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.loginlogos img{
+    height: 40px;
+    width: 40px;
+}
+
+.loginboardleft input{
+    outline: none;
+    border: 3px solid rgba(57, 230, 230, 0.601);
+    padding: 10px;
+    margin: 10px;
+    height: 50px;
+    width: 80%;
+    border-radius: 10px;
+}
+
+
+
+.loginbutton{
+    border-radius: 10px;
+    margin: 30px auto;
+    width: 50%;
+    height: 50px;
+    color: white;
+    border: 2px solid white;
+    background: radial-gradient(rgb(114, 214, 250), rgb(89, 212, 253) , rgb(78, 199, 251) , rgb(97, 193, 244) , rgb(95, 183, 241) ,rgb(93, 173, 239));
+}
+
+#label{
+  color: rgb(165, 165, 165);
+}
+
+.loginbutton:hover{
+    cursor: pointer;
+    background: white;
+    color: rgb(16, 178, 253);
+    border: 2px solid rgb(16, 178, 253);
+}
+
+
+
+.loginboardright{
+    width: 50%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    background: radial-gradient(rgb(114, 214, 250), rgb(89, 212, 253) , rgb(78, 199, 251) , rgb(97, 193, 244) , rgb(95, 183, 241) ,rgb(93, 173, 239));
+}
+
+
+.loginboardright h1{
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.loginboardright p{
+    width: 70%;
+    margin: 2px auto;
+}
+
+.signupbutton{
+    border-radius: 10px;
+    margin: 30px auto;
+    width: 50%;
+    height: 50px;
+    color: white;
+    border: 2px solid white;
+    background: transparent;
+}
+
+
+.signupbutton:hover{
+    cursor: pointer;
+    background: white;
+    color: rgb(16, 178, 253);
+}

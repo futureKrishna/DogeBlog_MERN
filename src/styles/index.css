@@ -1,0 +1,162 @@
+.mainbanner{
+    height: 600px;
+    width: 100%;
+    background-image: url('../../public/blogbanner.webp');
+    background-size: cover;
+}
+
+.bannercover{
+    height: 100%;
+    width: 100%;
+    background: rgba(3, 3, 3, 0.762);
+    text-align: center;
+    color: white;
+}
+
+.bannercover h1{
+    position: relative;
+    top: 35%;
+    font-size: 70px;
+}
+
+.span{
+    color: red;
+}
+
+.card{
+    width: 18rem;
+}
+
+.trending{
+    width: 80%;
+    margin: 10px auto;
+}
+
+.row{
+    width: 100%;
+    margin: 10px auto;
+    margin: 0;
+    padding: 0;
+}
+
+
+.trending{
+    display: flex;
+    width: 70%;
+    height: 300px;
+    margin: 2px auto;
+}
+
+
+.card{
+    width: 100%;
+    height: 100%;
+}
+
+.trendingLeft{
+    width: 50%;
+    height: 100%;
+}
+
+
+.trendingRight{
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+
+}
+
+.card1{
+    display: flex;
+    width: 100%;
+    height: 110px;
+    padding: 5px;
+    font-size: 15px;
+    /* border: 1px solid black; */
+}
+
+.card1 img{
+width: 30%;
+height: 100%;
+}
+
+.card1 h6{
+    font-size: 12px;
+}
+
+.data{
+    padding: 3px;
+}
+
+.data p{
+    margin: 2px;
+}
+.data h5{
+    margin: 2px;
+}
+
+.section2{
+    display: flex;
+    height: 400px; 
+    margin:40px ;
+}
+
+.section2Left{
+ width: 50%;
+ padding-inline-start: 20px;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ background: rgb(177, 176, 176);}
+
+.section2Left p{
+    width: 70%;
+    color: white;
+}
+
+
+.section2Right{
+    width: 50%;
+    height: 100%;
+    background:url('../../public/demo5.jpg');
+    background-size: cover;
+}
+
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.745);
+}
+
+.joinbutton{
+   width: 30%;
+   height: 70px;
+   border: 1px solid white;
+   border-radius: 10px; 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: white;
+   font-size: 25px;
+}
+
+
+.joinbutton:hover{
+    cursor: pointer;
+    background: white;
+    color: black;
+}
+
+
+
+.foot{
+    height: 400px;
+    width: 100%;
+    background-color: grey;
+}
